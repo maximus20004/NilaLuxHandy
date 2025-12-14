@@ -50,25 +50,27 @@
         }
 
         .error {
-            background-color: #ff4d4d; /* Rot für falsche Zahlenfolge */
+            background-color: #ff4d4d;
         }
 
         .success {
-            background-color: #4CAF50; /* Grün für 215 */
+            background-color: #4CAF50;
         }
 
         .hidden {
             display: none;
         }
 
-        .text-display {
-            font-size: 18px;
-            line-height: 1.6;
-            max-width: 600px;
+        .image-container img {
+            max-width: 100%;
+            width: 400px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
     </style>
 </head>
 <body>
+
     <div class="grid" id="numberGrid">
         <div class="cell" onclick="addNumber(1)">1</div>
         <div class="cell" onclick="addNumber(2)">2</div>
@@ -85,21 +87,16 @@
         Passwort: <span id="numbers"></span>
     </div>
 
-    <div class="text-display hidden" id="finalText">
-        􎈉􎈊􎈋 Mix it. Match it. Make it yours. 􎈉􎈊􎈋<br><br>
-        Ich liebe es, wenn ein Outfit nicht nur gut aussieht, sondern mir unendlich viele Möglichkeiten
-        gibt!<br>
-        Die neuen Oberteile, Röcke, die super bequeme Hose und meine aktuellen Stiefel-Faves
-        lassen sich so easy kombinieren, dass ich jeden Tag einen neuen Look tragen könnte. 􈆆􊻎􊻏􊳒􊳓􊳔􊳕<br>
-        Welches Teil würdet ihr als Erstes stylen?<br>
-        #outfitinspo #fashionmix #endlesscombos #NilaLuxStyle
+    <!-- Bild statt Text -->
+    <div class="image-container hidden" id="finalImage">
+        <img src="bild.jpg" alt="Freigeschaltetes Bild">
     </div>
 
     <script>
         const numbersSpan = document.getElementById('numbers');
         const passwordDisplay = document.getElementById('passwordDisplay');
         const numberGrid = document.getElementById('numberGrid');
-        const finalText = document.getElementById('finalText');
+        const finalImage = document.getElementById('finalImage');
 
         let clickedNumbers = [];
 
@@ -109,24 +106,24 @@
 
             if (clickedNumbers.length === 3) {
                 if (clickedNumbers.join('') === '215') {
-                    passwordDisplay.classList.add('success'); // Grün aufleuchten
+                    passwordDisplay.classList.add('success');
 
                     setTimeout(() => {
-                        // Zahlenfeld ausblenden
                         numberGrid.classList.add('hidden');
                         passwordDisplay.classList.add('hidden');
-                        finalText.classList.remove('hidden');
-                    }, 500); // kurze Verzögerung, damit die grüne Farbe sichtbar bleibt
+                        finalImage.classList.remove('hidden');
+                    }, 500);
                 } else {
-                    passwordDisplay.classList.add('error'); // Rot aufleuchten
+                    passwordDisplay.classList.add('error');
                     setTimeout(() => {
                         clickedNumbers = [];
                         numbersSpan.textContent = '';
                         passwordDisplay.classList.remove('error');
-                    }, 500); // 500ms Rot-Anzeige
+                    }, 500);
                 }
             }
         }
     </script>
+
 </body>
 </html>
